@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService", "BookingService\BookingService.csproj", "{DD051C76-07DF-4FA1-BD2D-33B7A082C40E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService.BLL", "BookingService.BLL\BookingService.BLL.csproj", "{74D9EA6B-CE45-468B-82AA-0685005FF1BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService.DAL", "BookingService.DAL\BookingService.DAL.csproj", "{A5399647-8321-48B2-9EE1-409506441B09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1003D97B-0DF8-4AB3-9475-94DF5DE42CF3}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD051C76-07DF-4FA1-BD2D-33B7A082C40E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD051C76-07DF-4FA1-BD2D-33B7A082C40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD051C76-07DF-4FA1-BD2D-33B7A082C40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD051C76-07DF-4FA1-BD2D-33B7A082C40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74D9EA6B-CE45-468B-82AA-0685005FF1BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74D9EA6B-CE45-468B-82AA-0685005FF1BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74D9EA6B-CE45-468B-82AA-0685005FF1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74D9EA6B-CE45-468B-82AA-0685005FF1BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5399647-8321-48B2-9EE1-409506441B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5399647-8321-48B2-9EE1-409506441B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5399647-8321-48B2-9EE1-409506441B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5399647-8321-48B2-9EE1-409506441B09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

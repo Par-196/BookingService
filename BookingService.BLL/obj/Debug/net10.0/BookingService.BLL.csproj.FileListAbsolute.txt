@@ -1,0 +1,15 @@
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\bin\Debug\net10.0\BookingService.BLL.deps.json
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\bin\Debug\net10.0\BookingService.BLL.dll
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\bin\Debug\net10.0\BookingService.BLL.pdb
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\bin\Debug\net10.0\BookingService.DAL.dll
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\bin\Debug\net10.0\BookingService.DAL.pdb
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingService.BLL.csproj.AssemblyReference.cache
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingService.BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingService.BLL.AssemblyInfoInputs.cache
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingService.BLL.AssemblyInfo.cs
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingService.BLL.csproj.CoreCompileInputs.cache
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingS.6073640E.Up2Date
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingService.BLL.dll
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\refint\BookingService.BLL.dll
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\BookingService.BLL.pdb
+D:\RiderProjects\RegularProjects\BookingService\BookingService.BLL\obj\Debug\net10.0\ref\BookingService.BLL.dll

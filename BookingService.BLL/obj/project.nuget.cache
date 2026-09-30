@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "dgSpecHash": "KQqp3lxIGPM=",
+  "success": true,
+  "projectFilePath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.entityframeworkcore\\10.0.12\\microsoft.entityframeworkcore.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\10.0.12\\microsoft.entityframeworkcore.abstractions.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\10.0.12\\microsoft.entityframeworkcore.analyzers.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\10.0.4\\microsoft.entityframeworkcore.relational.10.0.4.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.entityframeworkcore.tools.dotnet\\2.0.3\\microsoft.entityframeworkcore.tools.dotnet.2.0.3.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\10.0.12\\microsoft.extensions.caching.abstractions.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.caching.memory\\10.0.12\\microsoft.extensions.caching.memory.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.4\\microsoft.extensions.configuration.abstractions.10.0.4.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\10.0.12\\microsoft.extensions.dependencyinjection.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.12\\microsoft.extensions.dependencyinjection.abstractions.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.logging\\10.0.12\\microsoft.extensions.logging.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.12\\microsoft.extensions.logging.abstractions.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.options\\10.0.12\\microsoft.extensions.options.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.12\\microsoft.extensions.primitives.10.0.12.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.netcore.app\\2.0.7\\microsoft.netcore.app.2.0.7.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.0.7\\microsoft.netcore.dotnetapphost.2.0.7.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.0.7\\microsoft.netcore.dotnethostpolicy.2.0.7.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.0.7\\microsoft.netcore.dotnethostresolver.2.0.7.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.2\\microsoft.netcore.platforms.2.0.2.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\netstandard.library\\2.0.1\\netstandard.library.2.0.1.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\npgsql\\10.0.3\\npgsql.10.0.3.nupkg.sha512",
+    "C:\\Users\\Yurii\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\10.0.3\\npgsql.entityframeworkcore.postgresql.10.0.3.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Newtonsoft.Json' 10.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+      "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj",
+      "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
