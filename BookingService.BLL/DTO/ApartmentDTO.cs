@@ -1,4 +1,4 @@
-﻿using BookingService.BLL.Models.Enums;
+﻿using BookingService.BLL.Enums;
 
 namespace BookingService.BLL.Models;
 

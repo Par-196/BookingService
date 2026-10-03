@@ -10,3 +10,16 @@ D:\RiderProjects\RegularProjects\BookingService\BookingService.DAL\obj\Debug\net
 D:\RiderProjects\RegularProjects\BookingService\BookingService.DAL\obj\Debug\net10.0\refint\BookingService.DAL.dll
 D:\RiderProjects\RegularProjects\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.pdb
 D:\RiderProjects\RegularProjects\BookingService\BookingService.DAL\obj\Debug\net10.0\ref\BookingService.DAL.dll
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\bin\Debug\net10.0\BookingService.DAL.deps.json
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\bin\Debug\net10.0\BookingService.DAL.dll
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\bin\Debug\net10.0\BookingService.DAL.pdb
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.csproj.AssemblyReference.cache
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.AssemblyInfoInputs.cache
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.AssemblyInfo.cs
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.csproj.CoreCompileInputs.cache
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.sourcelink.json
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.dll
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\refint\BookingService.DAL.dll
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\BookingService.DAL.pdb
+D:\RiderProjects\GitPtojects\BookingService\BookingService\BookingService.DAL\obj\Debug\net10.0\ref\BookingService.DAL.dll

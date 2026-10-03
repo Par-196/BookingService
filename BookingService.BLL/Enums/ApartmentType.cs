@@ -1,4 +1,4 @@
-﻿namespace BookingService.BLL.Models.Enums;
+﻿namespace BookingService.BLL.Enums;
 
 public enum ApartmentTypes
 {

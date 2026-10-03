@@ -645,7 +645,9 @@
       },
       "BookingService.BLL/1.0.0": {
         "dependencies": {
-          "BookingService.DAL": "1.0.0"
+          "BookingService.DAL": "1.0.0",
+          "Microsoft.IdentityModel.Tokens": "8.19.2",
+          "System.IdentityModel.Tokens.Jwt": "8.19.2"
         },
         "runtime": {
           "BookingService.BLL.dll": {

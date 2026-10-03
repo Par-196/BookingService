@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj": {}
+    "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj": {}
   },
   "projects": {
-    "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj": {
+    "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj",
         "projectName": "BookingService.BLL",
-        "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj",
+        "projectPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj",
         "packagesPath": "C:\\Users\\Yurii\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\obj\\",
+        "outputPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yurii\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -27,8 +27,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
-                "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj"
+              "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
+                "projectPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj"
               }
             }
           }
@@ -49,6 +49,16 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
+          "dependencies": {
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.19.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.19.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -343,14 +353,14 @@
         }
       }
     },
-    "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
+    "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
         "projectName": "BookingService.DAL",
-        "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
+        "projectPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
         "packagesPath": "C:\\Users\\Yurii\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\obj\\",
+        "outputPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yurii\\AppData\\Roaming\\NuGet\\NuGet.Config"

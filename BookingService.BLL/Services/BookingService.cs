@@ -2,7 +2,6 @@
 using BookingService.BLL.Models;
 using BookingService.DAL.Context;
 using Microsoft.EntityFrameworkCore;
-
 namespace BookingService.BLL.Services;
 
 public class BookingService : IBookingService
@@ -14,7 +13,7 @@ public class BookingService : IBookingService
         _context = context;
     }
 
-    public async Task<BookingDTO?> GetBookingById(Guid id)
+    public async Task<BookingDTO?> GetBookingByIdAsync(Guid id)
     {
         var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
         if (booking is null)

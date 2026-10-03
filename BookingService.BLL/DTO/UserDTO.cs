@@ -1,4 +1,4 @@
-﻿using BookingService.DAL.Entity;
+﻿using BookingService.BLL.Enums;
 
 namespace BookingService.BLL.Models;
 
@@ -11,4 +11,6 @@ public class UserDTO
     public int Age { get; set; }
     public string Email { get; set; } = null!;
     public string Password { get; set; } = null!;
+    
+    public UserRoles  Role { get; set; } 
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {}
+    "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {}
   },
   "projects": {
-    "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
+    "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
         "projectName": "BookingService.DAL",
-        "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
+        "projectPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj",
         "packagesPath": "C:\\Users\\Yurii\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\obj\\",
+        "outputPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yurii\\AppData\\Roaming\\NuGet\\NuGet.Config"

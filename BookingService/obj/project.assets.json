@@ -1366,7 +1366,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
-          "BookingService.DAL": "1.0.0"
+          "BookingService.DAL": "1.0.0",
+          "Microsoft.IdentityModel.Tokens": "8.19.2",
+          "System.IdentityModel.Tokens.Jwt": "8.19.2"
         },
         "compile": {
           "bin/placeholder/BookingService.BLL.dll": {}
@@ -3999,11 +4001,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService\\BookingService.csproj",
+      "projectUniqueName": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService\\BookingService.csproj",
       "projectName": "BookingService",
-      "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService\\BookingService.csproj",
+      "projectPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService\\BookingService.csproj",
       "packagesPath": "C:\\Users\\Yurii\\.nuget\\packages\\",
-      "outputPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService\\obj\\",
+      "outputPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yurii\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4019,11 +4021,11 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj": {
-              "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj"
+            "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj": {
+              "projectPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.BLL\\BookingService.BLL.csproj"
             },
-            "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
-              "projectPath": "D:\\RiderProjects\\RegularProjects\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj"
+            "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj": {
+              "projectPath": "D:\\RiderProjects\\GitPtojects\\BookingService\\BookingService\\BookingService.DAL\\BookingService.DAL.csproj"
             }
           }
         }

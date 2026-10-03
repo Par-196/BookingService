@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookingService.Controllers;
 
 [ApiController]
-[Route("bookings")]
+[Route("/api/bookings")]
 public class BookingController : ControllerBase
 {
     private readonly IBookingService _bookingService;
@@ -18,7 +18,7 @@ public class BookingController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetBookingById(Guid id)
     {
-        var booking = await _bookingService.GetBookingById(id);
+        var booking = await _bookingService.GetBookingByIdAsync(id);
         if (booking is null)
         {
             return NotFound("booking not found");
