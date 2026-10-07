@@ -1,4 +1,5 @@
-﻿using BookingService.BLL.Enums;
+﻿using BookingService.BLL.Extensions.Mapping;
+using BookingService.BLL.Enums;
 using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
 using BookingService.DAL.Context;
@@ -23,44 +24,27 @@ public class ApartmentService : IApartmentService
     public async Task<ApartmentDTO?> GetApartmentByIdAsync(Guid id)
     {
         var apartmentModel = await _context.Apartments.FindAsync(id);
-        
+
         if(apartmentModel is null)
         {
             return null;
         }
-
-        var apartmentDTO = new ApartmentDTO
-        {
-            Id = apartmentModel.Id,
-            ApartmentType = Enum.Parse<ApartmentTypes>(apartmentModel.ApartmentType.ToString()),
-            Location = apartmentModel.Location
-        };
         
-        return apartmentDTO;
+        return apartmentModel.ToDto();;
     }
 
     public async Task<List<ApartmentDTO>> GetAllApartmentsAsync()
     {
-        var listApartmentsDto = await _context.Apartments.Select(a => new ApartmentDTO
-        {
-            Id = a.Id,
-            ApartmentType = Enum.Parse<ApartmentTypes>(a.ApartmentType.ToString()),
-            Location = a.Location
-        }).ToListAsync();
+        var listApartmentsDto = await _context.Apartments
+            .Select(a => a.ToDto())
+            .ToListAsync();
         
         return listApartmentsDto;
     }
 
     public async Task<bool> CreateApartmentAsync(ApartmentDTO apartmentDto)
     {
-        var apartmentsModel = new Apartment
-        {
-            Id = Guid.NewGuid(),
-            ApartmentType = Enum.Parse<DAL.Enums.ApartmentTypes>(apartmentDto.ApartmentType.ToString()),
-            Location = apartmentDto.Location
-        };
-
-        await _context.Apartments.AddAsync(apartmentsModel);
+        await _context.Apartments.AddAsync(apartmentDto.ToEntity());
         await _context.SaveChangesAsync();
         return true;
     }
@@ -73,12 +57,12 @@ public class ApartmentService : IApartmentService
         {
             return false;
         }
-        _logger.LogInformation("apartmentModel not null");
+        
         apartmentModel.Location = apartmentDto.Location;
         apartmentModel.ApartmentType = Enum.Parse<DAL.Enums.ApartmentTypes>(apartmentDto.ApartmentType.ToString());
-        _logger.LogInformation("apartmentModel changed");
+       
         var result = await _context.SaveChangesAsync();
-        _logger.LogInformation("apartmentModel saved");
+        
         return result > 0;
     }
 

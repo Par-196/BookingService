@@ -1,4 +1,5 @@
 ﻿using BookingService.BLL.Enums;
+using BookingService.BLL.Extensions.Mapping;
 using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
 using BookingService.DAL.Context;
@@ -25,33 +26,14 @@ public class UserService : IUserService
             return null;
         }
 
-        var userDTO = new UserDTO()
-        {
-            Id = userModel.Id,
-            FirstName = userModel.FirstName,
-            LastName = userModel.LastName,
-            Age = userModel.Age,
-            Email = userModel.Email,
-            Password = userModel.Password,
-            Role = Enum.Parse<UserRoles>(userModel.Role.ToString()),
-        };
-        
-        return userDTO;
+        return userModel.ToDto();
     }
     
     public async Task<List<UserDTO>> GetAllUsersAsync()
     {
-        var listUsersDto = await _context.Users.Select(u => new UserDTO()
-        {
-            Id = u.Id,
-            FirstName = u.FirstName,
-            LastName = u.LastName,
-            Age = u.Age,
-            Email = u.Email,
-            Password = u.Password,
-            Role = Enum.Parse<UserRoles>(u.Role.ToString()),
-            
-        }).ToListAsync();
+        var listUsersDto = await _context.Users
+            .Select(u => u.ToDto())
+            .ToListAsync();
         
         return listUsersDto;
     }
@@ -100,17 +82,6 @@ public class UserService : IUserService
             return null;
         }
 
-        var userDTO = new UserDTO()
-        {
-            Id = userModel.Id,
-            FirstName = userModel.FirstName,
-            LastName = userModel.LastName,
-            Age = userModel.Age,
-            Email = userModel.Email,
-            Password = userModel.Password,
-            Role = Enum.Parse<UserRoles>(userModel.Role.ToString()),
-        };
-        
-        return userDTO;
+        return userModel.ToDto();
     }
 }
