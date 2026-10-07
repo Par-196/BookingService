@@ -1,18 +1,24 @@
 ﻿using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
+using BookingService.BLL.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingService.Controllers;
 
 [ApiController]
-[Route("/api/user/")]
+[Route("/api/users/")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
 public class UserConroller : ControllerBase
 {
-    private IUserService _userService;
-    
-    public UserConroller(IUserService userService)
+    private readonly IUserService _userService;
+    private readonly UserContext _context;
+    public UserConroller(IUserService userService, UserContext context)
     {
         _userService = userService;
+        _context = context;
     }
 
     [HttpGet("{id:guid}")]
@@ -62,10 +68,11 @@ public class UserConroller : ControllerBase
         return Ok(user);
     }
     
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeleteUserAsync(Guid id)
+    [HttpDelete]
+    public async Task<IActionResult> DeleteUserAsync()
     {
-        var user = await _userService.DeleteUserByIdAsync(id);
+        var userId = _context.GetId();
+        var user = await _userService.DeleteUserByIdAsync(userId);
 
         if (!user)
         {

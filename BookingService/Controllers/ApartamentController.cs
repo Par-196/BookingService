@@ -1,11 +1,14 @@
 ﻿using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingService.Controllers;
 
 [ApiController]
 [Route("/api/apartments/")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
 public class ApartamentController : ControllerBase
 {

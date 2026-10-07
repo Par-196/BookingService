@@ -2,7 +2,7 @@
 
 namespace BookingService.BLL.Interfaces;
 
-public interface IAuthorizationService
+public interface IAuthenticationService
 { 
     public Task<bool> RegisterUserAsync(UserDTO userDTO);
     

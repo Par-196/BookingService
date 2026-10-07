@@ -55,7 +55,7 @@ public class ApartmentService : IApartmentService
     {
         var apartmentsModel = new Apartment
         {
-            Id = new Guid(),
+            Id = Guid.NewGuid(),
             ApartmentType = Enum.Parse<DAL.Enums.ApartmentTypes>(apartmentDto.ApartmentType.ToString()),
             Location = apartmentDto.Location
         };

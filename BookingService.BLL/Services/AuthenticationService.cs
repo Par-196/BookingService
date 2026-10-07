@@ -12,12 +12,12 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BookingService.BLL.Services;
 
-public class AuthorizationService : IAuthorizationService
+public class AuthenticationService : IAuthenticationService
 {
     private readonly BookingContext _context;
-    private readonly IConfiguration _configuration;
+    private readonly IConfiguration _configuration; //TODO: use IOptions<> pattern
 
-    public AuthorizationService(BookingContext context, IConfiguration configuration)
+    public AuthenticationService(BookingContext context, IConfiguration configuration)
     {
         _context = context;
         _configuration = configuration;
@@ -25,14 +25,16 @@ public class AuthorizationService : IAuthorizationService
 
     public async Task<bool> RegisterUserAsync(UserDTO userDTO)
     {
+        //TODO: validate if user with that email already exists
+        
         var userModel = new User
         {
-            Id = new Guid(),
+            Id = Guid.NewGuid(),
             FirstName = userDTO.FirstName,
             LastName = userDTO.LastName,
             Age = userDTO.Age,
             Email = userDTO.Email,
-            Password = userDTO.Password,
+            Password = userDTO.Password, // TODO: hash passwords
             Role = Enum.Parse<UserRoles>(userDTO.Role.ToString()),
         };
 
@@ -61,12 +63,11 @@ public class AuthorizationService : IAuthorizationService
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role.ToString())
             }),
-
             Expires = DateTime.UtcNow.AddMinutes(5),
             Issuer = issuer,
             Audience = audience,
-
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha512Signature)

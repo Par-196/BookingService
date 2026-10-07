@@ -13,7 +13,7 @@ public static class ApplicationServicesRegistration
         //AddSingleton - during whole application lifetime\
         
         services.AddScoped<IBookingService, Services.BookingService>();
-        services.AddScoped<IAuthorizationService, AuthorizationService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IApartmentService, ApartmentService>();
         services.AddScoped<IUserService, UserService>();
         return services;

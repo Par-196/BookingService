@@ -62,17 +62,17 @@ builder.Services.AddAuthentication(options =>
 
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidateLifetime = false,
+            ValidateLifetime = true,
             ValidateIssuerSigningKey = true
         };
     }); 
+
+
 builder.Services.AddAuthorization();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<UserContext>();
 
-
-
-
-
-
+// TODO: add exception middleware
 
 var app = builder.Build();
 
