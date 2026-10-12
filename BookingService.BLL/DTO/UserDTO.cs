@@ -1,6 +1,6 @@
 ﻿using BookingService.BLL.Enums;
 
-namespace BookingService.BLL.Models;
+namespace BookingService.BLL.DTO;
 
 public class UserDTO
 {

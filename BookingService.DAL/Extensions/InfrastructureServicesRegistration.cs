@@ -1,7 +1,9 @@
 ﻿using BookingService.DAL.Context;
+using BookingService.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BookingService.DAL.UnitOfWork;
 
 namespace BookingService.DAL.Extensions;
 
@@ -11,6 +13,9 @@ public static class InfrastructureServicesRegistration
     {
         services.AddDbContext<BookingContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DbConnectionString")));
+
+        
+        services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
         
         return services;
     }

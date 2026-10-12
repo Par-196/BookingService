@@ -1,4 +1,5 @@
 ﻿using BookingService.BLL.Models;
+using BookingService.BLL.Query;
 using BookingService.DAL.Entity;
 
 namespace BookingService.BLL.Extensions.Mapping;

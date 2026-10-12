@@ -1,5 +1,7 @@
-﻿using BookingService.BLL.Interfaces;
+﻿using BookingService.BLL.DTO;
+using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
+using BookingService.ViewModels.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +11,7 @@ namespace BookingService.Controllers;
 [Route("/api/auth/")]
 public class AuthenticationController : ControllerBase
 {
-    public IAuthenticationService? _authenticationService { get; set; }
+    private readonly IAuthenticationService _authenticationService;
 
     public AuthenticationController(IAuthenticationService authenticationService)
     {
@@ -17,9 +19,9 @@ public class AuthenticationController : ControllerBase
     }
     
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterUserAsync([FromBody] UserDTO userDTO) //TODO: FromQuery, FromRoute, FromBody
+    public async Task<IActionResult> RegisterUserAsync([FromBody] AuthModel authModel) //TODO: FromQuery, FromRoute, FromBody
     {
-        var result = await _authenticationService.RegisterUserAsync(userDTO);
+        var result = await _authenticationService.RegisterUserAsync(authModel.Email, authModel.Password);
 
         if (!result)
         {
@@ -30,9 +32,9 @@ public class AuthenticationController : ControllerBase
     }
     
     [HttpPost("login")]
-    public async Task<IActionResult> LoginUserAsync([FromBody] UserDTO userDTO)
+    public async Task<IActionResult> LoginUserAsync([FromBody] AuthModel authModel)
     {
-        var token = await _authenticationService.LoginUserAsync(userDTO);
+        var token = await _authenticationService.LoginUserAsync(authModel.Email, authModel.Password);
 
         if (token is null)
         {

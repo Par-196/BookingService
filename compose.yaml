@@ -24,5 +24,8 @@
 
 volumes:
   postgres_data:
+    
+    
+#    azurite / replaces blob storage
 
     

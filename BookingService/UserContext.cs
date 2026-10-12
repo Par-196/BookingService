@@ -14,10 +14,11 @@ public class UserContext
 
     public Guid GetId()
     {
-        var user = _httpContextAccessor.HttpContext?.User;
-        
-        var userIdClaim = user?.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        
+        var userIdClaim = _httpContextAccessor
+            .HttpContext?
+            .User
+            .FindFirstValue(ClaimTypes.NameIdentifier);
+
         return !Guid.TryParse(userIdClaim, out var userId) 
             ? throw new UnauthorizedAccessException("User id claim is missing.") 
             : userId;

@@ -1,4 +1,5 @@
-﻿using BookingService.BLL.Models;
+﻿using BookingService.BLL.DTO;
+using BookingService.BLL.Models;
 
 namespace BookingService.BLL.Interfaces;
 

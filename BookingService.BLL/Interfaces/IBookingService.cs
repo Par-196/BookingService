@@ -1,4 +1,6 @@
 ﻿using BookingService.BLL.Models;
+using BookingService.BLL.Query;
+
 
 namespace BookingService.BLL.Interfaces;
 
@@ -7,6 +9,8 @@ public interface IBookingService
     Task<BookingDTO?> GetBookingByIdAsync(Guid id);
 
     Task<List<BookingDTO>> GetAllBookingsAsync();
+    
+    Task<List<BookingDTO>> GetFilteredAndPaginatedBookingsAsync(BookingQuery filter);
 
     Task<List<BookingDTO>> GetBookingsByUserIdAsync(Guid userId);
 
@@ -17,4 +21,6 @@ public interface IBookingService
     Task<bool> UpdateBookingAsync(BookingDTO bookingDto);
 
     Task<bool> DeleteBookingByIdAsync(Guid id);
+
+    
 }

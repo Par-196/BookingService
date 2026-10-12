@@ -1,10 +1,11 @@
-﻿namespace BookingService.ViewModels.Filters;
+﻿namespace BookingService.BLL.Query;
 
-public class BookingFilter
+public class BookingQuery
 {
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public Guid? ApartmentId { get; set; }
 
-    public int Skip { get; set; } = 0;
+    public int Skip { get; set; }
+    public int Take { get; set; }
 }

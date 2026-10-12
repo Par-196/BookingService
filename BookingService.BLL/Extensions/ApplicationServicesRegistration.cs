@@ -1,4 +1,5 @@
 ﻿using BookingService.BLL.Interfaces;
+using BookingService.BLL.Options;
 using BookingService.BLL.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,8 @@ public static class ApplicationServicesRegistration
         //AddScoped - during Http call
         //AddTransient - every time you access it
         //AddSingleton - during whole application lifetime\
+        
+        
         
         services.AddScoped<IBookingService, Services.BookingService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();

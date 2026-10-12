@@ -1,5 +1,6 @@
 ﻿using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
+using BookingService.BLL.Query;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,11 @@ namespace BookingService.Controllers;
 public class BookingController : ControllerBase
 {
     private readonly IBookingService _bookingService;
-    
-    public BookingController(IBookingService bookingService)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public BookingController(IBookingService bookingService, IHttpContextAccessor IHttpContextAccessor)
     {
+        _httpContextAccessor = IHttpContextAccessor;
         _bookingService = bookingService;
     }
     
@@ -42,15 +45,25 @@ public class BookingController : ControllerBase
     //TODO: add endpoint for getting all bookings but filtered an paginated
     //[FromQuery] BookingFilter filter
     
-    [HttpGet("user/{id:guid}")]
+    [HttpGet]
+    public async Task<IActionResult> GetFilteredAndPaginatedBookingsAsync(BookingQuery bookingFilter)
+    {
+        var listBookings = await _bookingService.GetFilteredAndPaginatedBookingsAsync(bookingFilter);
+
+        return Ok(listBookings);
+    }
+    
+    
+    [HttpGet("user/{userId:guid}")]
     public async Task<IActionResult> GetBookingsByUserIdAsync(Guid userId)
     {
+        
         var listBookings = await _bookingService.GetBookingsByUserIdAsync(userId);
         
         return Ok(listBookings);
     }
 
-    [HttpGet("apartment/{id:guid}")]
+    [HttpGet("apartment/{apartmentId:guid}")]
     public async Task<IActionResult> GetBookingsByApartmentIdAsync(Guid apartmentId)
     {
         var listBookings = await _bookingService.GetBookingsByApartmentIdAsync(apartmentId);

@@ -1,4 +1,5 @@
-﻿using BookingService.BLL.Interfaces;
+﻿using BookingService.BLL.DTO;
+using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
 using BookingService.BLL.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,8 +35,8 @@ public class UserConroller : ControllerBase
         return Ok(user);
     }
 
-    [HttpGet("email")]
-    public async Task<IActionResult> GetUsersByEmail(string email)
+    [HttpGet("email/{email}")]
+    public async Task<IActionResult> GetUserByEmail(string email)
     {
         var user = await _userService.GetUserByEmailAsync(email);
 

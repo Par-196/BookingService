@@ -1,8 +1,8 @@
 ﻿using BookingService.BLL.Extensions.Mapping;
 using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
+using BookingService.BLL.Query;
 using BookingService.DAL.Context;
-using BookingService.DAL.Entity;
 using Microsoft.EntityFrameworkCore;
 namespace BookingService.BLL.Services;
 
@@ -29,7 +29,7 @@ public class BookingService : IBookingService
             StartDate = booking.StartDate,
             EndDate = booking.EndDate,
             ApartmentId = booking.ApartmentId,
-            UserId = booking.UserId,
+            UserId = booking.UserId
         };
     }
 
@@ -47,6 +47,36 @@ public class BookingService : IBookingService
             .Where(b => b.UserId == userId).ToListAsync();
 
         return userBookingsDtoList;
+    }
+
+    public async Task<List<BookingDTO>> GetFilteredAndPaginatedBookingsAsync(BookingQuery filter)
+    {
+        var query = _context.Bookings.AsNoTracking();
+
+        if (filter.StartDate.HasValue)
+        {
+            query = query.Where(b =>
+                b.StartDate >= filter.StartDate.Value);
+        }
+        if (filter.EndDate.HasValue)
+        {
+            query = query.Where(b =>
+                b.EndDate <= filter.EndDate.Value);
+        }
+        if (filter.ApartmentId.HasValue)
+        {
+            query = query.Where(b =>
+                b.ApartmentId == filter.ApartmentId.Value);
+        }
+
+        var bookings = await query
+            .OrderBy(b => b.StartDate)
+            .ThenBy(b => b.Id)
+            .Skip(filter.Skip)
+            .Take(filter.Take)
+            .ToListAsync();
+        
+        return bookings.Select(b => b.ToDto()).ToList();
     }
 
     public async Task<List<BookingDTO>> GetBookingsByApartmentIdAsync(Guid apartmentId)

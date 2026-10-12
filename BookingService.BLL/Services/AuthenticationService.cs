@@ -1,13 +1,15 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using BookingService.BLL.Extensions.Mapping;
 using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
+using BookingService.BLL.Options;
 using BookingService.DAL.Context;
 using BookingService.DAL.Entity;
-using BookingService.DAL.Enums;
+using BookingService.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BookingService.BLL.Services;
@@ -15,47 +17,49 @@ namespace BookingService.BLL.Services;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly BookingContext _context;
-    private readonly IConfiguration _configuration; //TODO: use IOptions<> pattern
-
-    public AuthenticationService(BookingContext context, IConfiguration configuration)
+    private readonly IOptions<JwtOptions> _jwtOptions;
+    
+    public AuthenticationService(BookingContext context, IOptions<JwtOptions> options)
     {
         _context = context;
-        _configuration = configuration;
+        _jwtOptions = options;
     }
 
-    public async Task<bool> RegisterUserAsync(UserDTO userDTO)
+    public async Task<bool> RegisterUserAsync(string email, string password)
     {
         //TODO: validate if user with that email already exists
         
-        var userModel = new User
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user is null)
+        {
+            throw new UserAlreadyExistsException("User with this email already exists.");
+        }
+
+        var entity = new User
         {
             Id = Guid.NewGuid(),
-            FirstName = userDTO.FirstName,
-            LastName = userDTO.LastName,
-            Age = userDTO.Age,
-            Email = userDTO.Email,
-            Password = userDTO.Password, // TODO: hash passwords
-            Role = Enum.Parse<UserRoles>(userDTO.Role.ToString()),
+            Email = email,
+            Password = password
         };
-
-        await _context.Users.AddAsync(userModel);
+        
+        await _context.Users.AddAsync(entity);
         await _context.SaveChangesAsync();
         return true;
     }
 
-    public async Task<string?> LoginUserAsync(UserDTO userDTO)
+    public async Task<string?> LoginUserAsync(string email, string password)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == userDTO.Email && x.Password == userDTO.Password);
+        var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
         
-        if (user == null || user.Password != userDTO.Password)
+        if (user == null || user.Password != password)
         {
             return null;
         }
-        
-        var issuer = _configuration["Jwt:Issuer"];
-        var audience = _configuration["Jwt:Audience"];
+
+        var issuer = _jwtOptions.Value.Issuer;
+        var audience = _jwtOptions.Value.Audience;
         var key = Encoding.ASCII.GetBytes
-            (_configuration["Jwt:Key"]!);
+            (_jwtOptions.Value.Key);
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -78,4 +82,5 @@ public class AuthenticationService : IAuthenticationService
         
         return tokenHandler.WriteToken(token);
     }
+    
 }
