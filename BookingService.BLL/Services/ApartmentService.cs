@@ -1,29 +1,22 @@
 ﻿using BookingService.BLL.Extensions.Mapping;
-using BookingService.BLL.Enums;
 using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
-using BookingService.DAL.Context;
-using BookingService.DAL.Entity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using BookingService.DAL.Interfaces;
+using BookingService.DAL.UnitOfWork;
 
 namespace BookingService.BLL.Services;
 
 public class ApartmentService : IApartmentService
 {
-    private BookingContext _context;
-    
-    private ILogger<ApartmentService> _logger;
-    
-    public ApartmentService(BookingContext context, ILogger<ApartmentService> logger)
+    private IUnitOfWork _unitOfWork;
+    public ApartmentService(IUnitOfWork unitOfWork)
     {
-        _context = context;
-        _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ApartmentDTO?> GetApartmentByIdAsync(Guid id)
     {
-        var apartmentModel = await _context.Apartments.FindAsync(id);
+        var apartmentModel = await _unitOfWork.ApartmentRepository.GetApartmentByIdAsync(id);
 
         if(apartmentModel is null)
         {
@@ -35,49 +28,35 @@ public class ApartmentService : IApartmentService
 
     public async Task<List<ApartmentDTO>> GetAllApartmentsAsync()
     {
-        var listApartmentsDto = await _context.Apartments
-            .Select(a => a.ToDto())
-            .ToListAsync();
+        var listApartments = await _unitOfWork.ApartmentRepository.GetAllApartmentsAsync();
         
-        return listApartmentsDto;
+        return listApartments.Select(x => x.ToDto()).ToList();
     }
 
     public async Task<bool> CreateApartmentAsync(ApartmentDTO apartmentDto)
     {
-        await _context.Apartments.AddAsync(apartmentDto.ToEntity());
-        await _context.SaveChangesAsync();
+        await _unitOfWork.ApartmentRepository.CreateApartmentAsync(apartmentDto.ToEntity());
+        await _unitOfWork.SaveChangesAsync();
         return true;
     }
 
     public async Task<bool> UpdateApartmentAsync(ApartmentDTO apartmentDto)
     {
-        var apartmentModel = await _context.Apartments.FindAsync(apartmentDto.Id);
+        var isUpdated  = await _unitOfWork.ApartmentRepository.UpdateApartmentAsync(apartmentDto.ToEntity());
         
-        if (apartmentModel is null)
-        {
+        if (!isUpdated)
             return false;
-        }
         
-        apartmentModel.Location = apartmentDto.Location;
-        apartmentModel.ApartmentType = Enum.Parse<DAL.Enums.ApartmentTypes>(apartmentDto.ApartmentType.ToString());
-       
-        var result = await _context.SaveChangesAsync();
-        
-        return result > 0;
+        return await _unitOfWork.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> DeleteApartmentByIdAsync(Guid id)
     {
-        var apartmentModel = await _context.Apartments.FindAsync(id);
+        var isDelete = await _unitOfWork.ApartmentRepository.DeleteApartmentByIdAsync(id);
 
-        if (apartmentModel is null)
-        {
+        if (!isDelete)
             return false;
-        }
 
-        _context.Remove(apartmentModel);
-        
-        var result = await _context.SaveChangesAsync();
-        return result > 0;
+        return await _unitOfWork.SaveChangesAsync() > 0;
     }
 }

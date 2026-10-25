@@ -1,14 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BookingService.BLL.Extensions.Mapping;
 using BookingService.BLL.Interfaces;
-using BookingService.BLL.Models;
 using BookingService.BLL.Options;
-using BookingService.DAL.Context;
 using BookingService.DAL.Entity;
+using BookingService.DAL.Interfaces;
 using BookingService.Exceptions;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,21 +13,19 @@ namespace BookingService.BLL.Services;
 
 public class AuthenticationService : IAuthenticationService
 {
-    private readonly BookingContext _context;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IOptions<JwtOptions> _jwtOptions;
     
-    public AuthenticationService(BookingContext context, IOptions<JwtOptions> options)
+    public AuthenticationService(IOptions<JwtOptions> options, IUnitOfWork unitOfWork)
     {
-        _context = context;
         _jwtOptions = options;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<bool> RegisterUserAsync(string email, string password)
     {
-        //TODO: validate if user with that email already exists
-        
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-        if (user is null)
+        var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+        if (user != null)
         {
             throw new UserAlreadyExistsException("User with this email already exists.");
         }
@@ -41,17 +36,17 @@ public class AuthenticationService : IAuthenticationService
             Email = email,
             Password = password
         };
-        
-        await _context.Users.AddAsync(entity);
-        await _context.SaveChangesAsync();
+
+        await _unitOfWork.UserRepository.AddAsync(entity);
+        await _unitOfWork.SaveChangesAsync();
         return true;
     }
 
     public async Task<string?> LoginUserAsync(string email, string password)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+        var user = await _unitOfWork.UserRepository.GetUser(u => u.Email == email && u.Password == password);
         
-        if (user == null || user.Password != password)
+        if (user == null)
         {
             return null;
         }

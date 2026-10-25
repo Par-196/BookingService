@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessBookingDocument", "ProcessBookingDocument\ProcessBookingDocument.csproj", "{8858CE73-A57B-4B6F-8365-CBACB2205D46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{31888E9F-9615-4264-960E-4CECF30BD938}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService.Tests", "BookingService.Tests\BookingService.Tests.csproj", "{9D81567E-CED3-4E16-B50A-14A8BF822DC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,9 +37,9 @@ Global
 		{8858CE73-A57B-4B6F-8365-CBACB2205D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8858CE73-A57B-4B6F-8365-CBACB2205D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8858CE73-A57B-4B6F-8365-CBACB2205D46}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31888E9F-9615-4264-960E-4CECF30BD938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31888E9F-9615-4264-960E-4CECF30BD938}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31888E9F-9615-4264-960E-4CECF30BD938}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31888E9F-9615-4264-960E-4CECF30BD938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D81567E-CED3-4E16-B50A-14A8BF822DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D81567E-CED3-4E16-B50A-14A8BF822DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D81567E-CED3-4E16-B50A-14A8BF822DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D81567E-CED3-4E16-B50A-14A8BF822DC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

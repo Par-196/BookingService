@@ -7,12 +7,16 @@ namespace BookingService.DAL.UnitOfWork;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly BookingContext _context;
-    public IBookingRepository Bookigns { get; }
     
+    public IApartmentRepository ApartmentRepository { get; set; }
+    public IBookingRepository BookingRepository { get; set; }
+    public IUserRepository UserRepository { get; set; }
     public UnitOfWork(BookingContext context)
     {
         _context = context;
-        Bookigns = new BookingRepository(_context);
+        BookingRepository = new BookingRepository(_context);
+        UserRepository = new UserRepository(_context);
+        ApartmentRepository = new ApartmentRepository(_context);
     }
     
     public Task<int> SaveChangesAsync()

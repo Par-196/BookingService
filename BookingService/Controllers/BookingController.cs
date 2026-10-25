@@ -35,7 +35,7 @@ public class BookingController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllBookingsAsync()
+    public async Task<IActionResult?> GetAllBookingsAsync()
     {
         var listBookings = await _bookingService.GetAllBookingsAsync();
 
@@ -45,13 +45,13 @@ public class BookingController : ControllerBase
     //TODO: add endpoint for getting all bookings but filtered an paginated
     //[FromQuery] BookingFilter filter
     
-    [HttpGet]
-    public async Task<IActionResult> GetFilteredAndPaginatedBookingsAsync(BookingQuery bookingFilter)
-    {
-        var listBookings = await _bookingService.GetFilteredAndPaginatedBookingsAsync(bookingFilter);
-
-        return Ok(listBookings);
-    }
+    // [HttpGet]
+    // public async Task<IActionResult> GetFilteredAndPaginatedBookingsAsync(BookingQuery bookingFilter)
+    // {
+    //     var listBookings = await _bookingService.GetFilteredAndPaginatedBookingsAsync(bookingFilter);
+    //
+    //     return Ok(listBookings);
+    // }
     
     
     [HttpGet("user/{userId:guid}")]

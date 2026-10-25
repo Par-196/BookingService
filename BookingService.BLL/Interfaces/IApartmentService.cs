@@ -4,7 +4,7 @@ namespace BookingService.BLL.Interfaces;
 
 public interface IApartmentService
 {
-    public Task<ApartmentDTO> GetApartmentByIdAsync(Guid id);
+    public Task<ApartmentDTO?> GetApartmentByIdAsync(Guid id);
     
     public Task<List<ApartmentDTO>> GetAllApartmentsAsync();
     
