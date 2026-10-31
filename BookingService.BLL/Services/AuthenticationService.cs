@@ -15,11 +15,13 @@ public class AuthenticationService : IAuthenticationService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IOptions<JwtOptions> _jwtOptions;
-    
-    public AuthenticationService(IOptions<JwtOptions> options, IUnitOfWork unitOfWork)
+    private readonly PasswordService _passwordService;
+
+    public AuthenticationService(IOptions<JwtOptions> options, IUnitOfWork unitOfWork, PasswordService passwordService)
     {
         _jwtOptions = options;
         _unitOfWork = unitOfWork;
+        _passwordService = passwordService;
     }
 
     public async Task<bool> RegisterUserAsync(string email, string password)
@@ -34,7 +36,7 @@ public class AuthenticationService : IAuthenticationService
         {
             Id = Guid.NewGuid(),
             Email = email,
-            Password = password
+            Password = _passwordService.HashPassword(password),
         };
 
         await _unitOfWork.UserRepository.AddAsync(entity);
@@ -44,9 +46,10 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<string?> LoginUserAsync(string email, string password)
     {
-        var user = await _unitOfWork.UserRepository.GetUser(u => u.Email == email && u.Password == password);
-        
-        if (user == null)
+        var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+
+        if (user is null ||
+            !_passwordService.VerifyPassword(user.Password, password))
         {
             return null;
         }

@@ -10,6 +10,7 @@ public class AuthenticationServiceFixture
 {
     public (
         AuthenticationService Service,
+        PasswordService PasswordService,
         IUnitOfWork UnitOfWork,
         IUserRepository UserRepository
         ) Create()
@@ -18,6 +19,8 @@ public class AuthenticationServiceFixture
         var userRepository = Substitute.For<IUserRepository>();
 
         unitOfWork.UserRepository.Returns(userRepository);
+
+        var passwordService = new PasswordService();
 
         var jwtOptions = Options.Create(new JwtOptions
         {
@@ -29,9 +32,14 @@ public class AuthenticationServiceFixture
 
         var service = new AuthenticationService(
             jwtOptions,
-            unitOfWork
-        );
+            unitOfWork,
+            passwordService);
 
-        return (service, unitOfWork, userRepository);
+        return (
+            service,
+            passwordService,
+            unitOfWork,
+            userRepository
+        );
     }
 }

@@ -8,8 +8,7 @@ namespace BookingService.DAL.Repository;
 
 public class BookingRepository : IBookingRepository
 {
-    private BookingContext _context;
-    private IBookingRepository _bookingRepositoryImplementation;
+    private readonly BookingContext _context;
 
     public BookingRepository(BookingContext context)
     {
@@ -56,9 +55,12 @@ public class BookingRepository : IBookingRepository
         return bookings.ToList();
     }
 
-    public async Task<List<Booking>?> GetBookingsByUserIdAsync(Guid userId)
+    public async Task<List<Booking>> GetBookingsByUserIdAsync(Guid userId)
     {
-        return await _context.Bookings.Where(b => b.Id == userId).ToListAsync();
+        return await _context.Bookings
+            .AsNoTracking()
+            .Where(b => b.UserId == userId)
+            .ToListAsync();
     }
 
     public async Task<List<Booking>> GetBookingsByApartmentIdAsync(Guid apartmentId)
@@ -75,19 +77,28 @@ public class BookingRepository : IBookingRepository
     public async Task<bool> UpdateBookingAsync(Booking booking)
     {
         var bookingModel = await _context.Bookings.FindAsync(booking.Id);
-        
+
+        if (bookingModel is null)
+            return false;
+
         bookingModel.StartDate = booking.StartDate;
         bookingModel.EndDate = booking.EndDate;
         bookingModel.ApartmentId = booking.ApartmentId;
         bookingModel.UserId = booking.UserId;
+
         return true;
     }
 
     public async Task<bool> DeleteBookingByIdAsync(Guid id)
     {
-        return await _context.Bookings
-            .Where(b => b.Id == id)
-            .ExecuteDeleteAsync() > 0;
+        var booking = await _context.Bookings.FindAsync(id);
+
+        if (booking is null)
+            return false;
+
+        _context.Bookings.Remove(booking);
+
+        return true;
     }
 
     // public async Task<bool> HasBookingConflictAsync(Guid apartmentId, DateTime startDate, DateTime endDate)

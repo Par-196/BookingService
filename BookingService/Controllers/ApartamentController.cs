@@ -26,7 +26,7 @@ public class ApartamentController : ControllerBase
 
         if (apartment is null)
         {
-            return BadRequest();
+            return NotFound();
         }
 
         return Ok(apartment);
@@ -50,7 +50,7 @@ public class ApartamentController : ControllerBase
             return BadRequest();
         }
         
-        return Ok(result);
+        return StatusCode(StatusCodes.Status201Created);
     }
     
     [HttpPatch]

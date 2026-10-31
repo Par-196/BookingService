@@ -1,4 +1,5 @@
 ﻿using BookingService.DAL.Context;
+using BookingService.DAL.Entity;
 using BookingService.DAL.Interfaces;
 using BookingService.DAL.Repository;
 

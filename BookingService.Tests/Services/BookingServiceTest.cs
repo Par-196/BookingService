@@ -1,7 +1,10 @@
-﻿using BookingService.BLL.Models;
+﻿using BookingService.BLL.Extensions.Mapping;
+using BookingService.BLL.Extensions.Mapping.Extensions;
+using BookingService.BLL.Models;
 using BookingService.DAL.Entity;
 using BookingService.Tests.Fixtures;
 using NSubstitute;
+using NSubstitute.ReceivedExtensions;
 
 namespace BookingService.Tests.Services;
 
@@ -20,16 +23,6 @@ public class BookingServiceTest
         UserId = Guid.NewGuid(),
     };
     
-    private static readonly BookingDTO _bookingDto = new BookingDTO
-    {
-        Id = _booking.Id,
-        StartDate = _booking.StartDate,
-        EndDate = _booking.EndDate,
-        ApartmentId = _booking.ApartmentId,
-        UserId = _booking.UserId,
-    };
-    
-    private readonly List<Booking> _listBookings = new List<Booking>();
     
     public BookingServiceTest(BookingServiceFixture fixture)
     {
@@ -63,7 +56,7 @@ public class BookingServiceTest
 
         bookingRepository
             .GetBookingByIdAsync(_booking.Id)!
-            .Returns(Task.FromResult(_booking));
+            .Returns(_booking);
 
         var result = await service
             .GetBookingByIdAsync(Guid.NewGuid());
@@ -81,12 +74,10 @@ public class BookingServiceTest
     {
         var(service, unitOfWork, bookingRepository) = 
             _fixture.Create();
-
-        _listBookings.Add(_booking);
         
         bookingRepository
             .GetAllBookingsAsync()
-            .Returns(Task.FromResult(_listBookings));
+            .Returns(Task.FromResult((List<Booking>)[_booking]));
 
         var result = await service.GetAllBookingsAsync();
 
@@ -121,12 +112,10 @@ public class BookingServiceTest
     {
         var(service, unitOfWork, bookingRepository) = 
             _fixture.Create();
-
-        _listBookings.Add(_booking);
         
         bookingRepository
             .GetBookingsByUserIdAsync(_booking.UserId)!
-            .Returns(Task.FromResult(_listBookings));
+            .Returns(Task.FromResult((List<Booking>)[_booking]));
 
         var result = await service.GetBookingsByUserIdAsync(_booking.UserId);
 
@@ -163,12 +152,10 @@ public class BookingServiceTest
     {
         var(service, unitOfWork, bookingRepository) = 
             _fixture.Create();
-
-        _listBookings.Add(_booking);
         
         bookingRepository
             .GetBookingsByApartmentIdAsync(_booking.ApartmentId)!
-            .Returns(Task.FromResult(_listBookings));
+            .Returns(Task.FromResult((List<Booking>)[_booking]));
 
         var result = await service.GetBookingsByApartmentIdAsync(_booking.ApartmentId);
 
@@ -203,6 +190,7 @@ public class BookingServiceTest
     [Fact]
     public async Task CreateBookingAsync_WasCreated()
     {
+        //Arrange
         var(service, unitOfWork, bookingRepository) = 
             _fixture.Create();
 
@@ -214,8 +202,10 @@ public class BookingServiceTest
             .SaveChangesAsync()
             .Returns(1);
 
-        var result = await service.CreateBookingAsync(_bookingDto);
-
+        //Act
+        var result = await service.CreateBookingAsync(_booking.ToDto());
+    
+        //Assert
         Assert.True(result);
 
         await bookingRepository
@@ -241,7 +231,7 @@ public class BookingServiceTest
             .SaveChangesAsync()
             .Returns(0);
         
-        var result = await service.CreateBookingAsync(_bookingDto);
+        var result = await service.CreateBookingAsync(_booking.ToDto());
 
         Assert.False(result);
 
@@ -269,7 +259,7 @@ public class BookingServiceTest
             .SaveChangesAsync()
             .Returns(1);
 
-        var result = await service.UpdateBookingAsync(_bookingDto);
+        var result = await service.UpdateBookingAsync(_booking.ToDto());
 
         Assert.True(result);
 
@@ -296,7 +286,7 @@ public class BookingServiceTest
             .SaveChangesAsync()
             .Returns(0);
         
-        var result = await service.UpdateBookingAsync(_bookingDto);
+        var result = await service.UpdateBookingAsync(_booking.ToDto());
 
         Assert.False(result);
 

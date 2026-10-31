@@ -29,7 +29,7 @@ public class UserConroller : ControllerBase
 
         if (user is null)
         {
-            return BadRequest();
+            return NotFound();
         }
 
         return Ok(user);
@@ -80,6 +80,6 @@ public class UserConroller : ControllerBase
             return BadRequest();
         }
 
-        return Ok(user);
+        return NoContent();
     }
 }

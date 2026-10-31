@@ -1,4 +1,5 @@
 ﻿using BookingService.BLL.Extensions.Mapping;
+using BookingService.BLL.Extensions.Mapping.Extensions;
 using BookingService.BLL.Extensions.Mapping.Queery;
 using BookingService.BLL.Interfaces;
 using BookingService.BLL.Models;
@@ -52,22 +53,32 @@ public class BookingService : IBookingService
             .ToList();
     }
 
-    public async Task<bool> CreateBookingAsync(BookingDTO bookingDto)
+    public async Task<bool> CreateBookingAsync(BookingDTO? bookingDto)
     {
-        return await _unitOfWork.BookingRepository.CreateBookingAsync(bookingDto.ToEntity())
-               && await _unitOfWork.SaveChangesAsync() > 0;
+        return bookingDto is not null 
+               && (await _unitOfWork.BookingRepository.CreateBookingAsync(bookingDto.ToEntity()) 
+               && await _unitOfWork.SaveChangesAsync() > 0);
     }
 
-    public async Task<bool> UpdateBookingAsync(BookingDTO bookingDto)
+    public async Task<bool> UpdateBookingAsync(BookingDTO? bookingDto)
     {
-        return await _unitOfWork.BookingRepository.UpdateBookingAsync(bookingDto.ToEntity())
-               && await _unitOfWork.SaveChangesAsync() > 0;
+        return bookingDto is not null 
+               && (await _unitOfWork.BookingRepository.UpdateBookingAsync(bookingDto.ToEntity()) 
+                   && await _unitOfWork.SaveChangesAsync() > 0);
     }
 
     public async Task<bool> DeleteBookingByIdAsync(Guid id)
     {
-        return await _unitOfWork.BookingRepository.DeleteBookingByIdAsync(id)
-               && await _unitOfWork.SaveChangesAsync() > 0;
+        if (id == Guid.Empty)
+            return false;
+
+        var deleted = await _unitOfWork.BookingRepository
+            .DeleteBookingByIdAsync(id);
+
+        if (!deleted)
+            return false;
+
+        return await _unitOfWork.SaveChangesAsync() > 0;
     }
 
     // private async Task<bool> IsApartmentAvailableAsync(Guid apartmentId, DateTime startDate, DateTime endDate)

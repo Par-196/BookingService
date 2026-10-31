@@ -1,4 +1,6 @@
-﻿namespace BookingService.DAL.Entity;
+﻿using BookingService.DAL.Enums;
+
+namespace BookingService.DAL.Entity;
 
 public class Booking
 {

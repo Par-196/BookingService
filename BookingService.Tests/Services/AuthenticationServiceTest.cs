@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using BookingService.DAL.Entity;
+﻿using BookingService.DAL.Entity;
 using BookingService.Exceptions;
 using BookingService.Tests.Fixtures;
 using NSubstitute;
@@ -23,29 +22,32 @@ public class AuthenticationServiceTest
     public async Task LoginUserAsync_RunSuccessfully()
     {
         // Arrange
-        var (service, unitOfWork, userRepository) =
+        var (service, passwordService, unitOfWork, userRepository) =
             _fixture.Create();
 
         var user = new User
         {
             Id = Guid.NewGuid(),
             Email = Email,
-            Password = Password
+            Password = passwordService.HashPassword(Password)
         };
-        
+
         userRepository
-            .GetUser(
-                Arg.Any<Expression<Func<User, bool>>>())
+            .GetByEmailAsync(Email)
             .Returns(Task.FromResult<User?>(user));
 
         // Act
         var result = await service.LoginUserAsync(
             Email,
-            Password
-        );
+            Password);
 
         // Assert
         Assert.NotNull(result);
+        Assert.NotEmpty(result);
+
+        await userRepository
+            .Received(1)
+            .GetByEmailAsync(Email);
     }
 
     [Theory]
@@ -55,36 +57,65 @@ public class AuthenticationServiceTest
         string email)
     {
         // Arrange
-        var (service, unitOfWork, userRepository) =
+        var (service, _, _, userRepository) =
             _fixture.Create();
 
         userRepository
-            .GetUser(
-                Arg.Any<Expression<Func<User, bool>>>())
+            .GetByEmailAsync(email)
             .Returns(Task.FromResult<User?>(null));
 
         // Act
         var result = await service.LoginUserAsync(
             email,
-            Password
-        );
+            Password);
+
+        // Assert
+        Assert.Null(result);
+
+        await userRepository
+            .Received(1)
+            .GetByEmailAsync(email);
+    }
+
+    [Fact]
+    public async Task LoginUserAsync_ShouldReturnNull_IfInvalidPassword()
+    {
+        // Arrange
+        var (service, passwordService, _, userRepository) =
+            _fixture.Create();
+
+        var user = new User
+        {
+            Id = Guid.NewGuid(),
+            Email = Email,
+            Password = passwordService.HashPassword(Password)
+        };
+
+        userRepository
+            .GetByEmailAsync(Email)
+            .Returns(Task.FromResult<User?>(user));
+
+        // Act
+        var result = await service.LoginUserAsync(
+            Email,
+            "WrongPassword123");
 
         // Assert
         Assert.Null(result);
     }
-    
+
     [Fact]
     public async Task RegisterUserAsync_IfUserAlreadyExists()
     {
         // Arrange
-        var (service, unitOfWork, userRepository) =
+        var (service, _, unitOfWork, userRepository) =
             _fixture.Create();
 
         var existingUser = new User
         {
             Id = Guid.NewGuid(),
             Email = Email,
-            Password = Password
+            Password = "ExistingPasswordHash"
         };
 
         userRepository
@@ -93,8 +124,7 @@ public class AuthenticationServiceTest
 
         // Act & Assert
         await Assert.ThrowsAsync<UserAlreadyExistsException>(
-            () => service.RegisterUserAsync(Email, Password)
-        );
+            () => service.RegisterUserAsync(Email, Password));
 
         await userRepository
             .DidNotReceive()
@@ -113,28 +143,41 @@ public class AuthenticationServiceTest
         string password)
     {
         // Arrange
-        var (service, unitOfWork, userRepository) =
+        var (service, passwordService, unitOfWork, userRepository) =
             _fixture.Create();
 
         userRepository
             .GetByEmailAsync(email)
             .Returns(Task.FromResult<User?>(null));
 
+        User? createdUser = null;
+
+        userRepository
+            .AddAsync(Arg.Do<User>(u => createdUser = u))
+            .Returns(Task.CompletedTask);
+
         // Act
         var result = await service.RegisterUserAsync(
             email,
-            password
-        );
+            password);
 
         // Assert
         Assert.True(result);
 
+        Assert.NotNull(createdUser);
+        Assert.Equal(email, createdUser.Email);
+        Assert.NotEqual(Guid.Empty, createdUser.Id);
+
+        Assert.NotEqual(password, createdUser.Password);
+
+        Assert.True(
+            passwordService.VerifyPassword(
+                createdUser.Password,
+                password));
+
         await userRepository
             .Received(1)
-            .AddAsync(Arg.Is<User>(u =>
-                u.Email == email &&
-                u.Password == password &&
-                u.Id != Guid.Empty));
+            .AddAsync(Arg.Any<User>());
 
         await unitOfWork
             .Received(1)

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookingService.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3c336a092c7a1f7b241494c88079279d841e4d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d526f9f78fbc299d170adc3308aba11158b060d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookingService.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookingService.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

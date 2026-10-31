@@ -42,16 +42,15 @@ public class BookingController : ControllerBase
         return Ok(listBookings);
     }
     
-    //TODO: add endpoint for getting all bookings but filtered an paginated
-    //[FromQuery] BookingFilter filter
-    
-    // [HttpGet]
-    // public async Task<IActionResult> GetFilteredAndPaginatedBookingsAsync(BookingQuery bookingFilter)
-    // {
-    //     var listBookings = await _bookingService.GetFilteredAndPaginatedBookingsAsync(bookingFilter);
+    // TODO: add endpoint for getting all bookings but filtered an paginated
+    // [FromQuery] BookingFilter filter
+    //  [HttpGet]
+    //  public async Task<IActionResult> GetFilteredAndPaginatedBookingsAsync(BookingQuery bookingFilter)
+    //  {
+    //      var listBookings = await _bookingService.GetFilteredAndPaginatedBookingsAsync(bookingFilter);
     //
-    //     return Ok(listBookings);
-    // }
+    //      return Ok(listBookings);
+    //  }
     
     
     [HttpGet("user/{userId:guid}")]
@@ -95,7 +94,7 @@ public class BookingController : ControllerBase
         return BadRequest("Booking update failed");
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> DeleteBookingByIdAsync(Guid id)
     {
         var result = await _bookingService.DeleteBookingByIdAsync(id);

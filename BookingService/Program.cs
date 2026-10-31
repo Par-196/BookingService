@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
 using BookingService;
+using BookingService.BLL.DataMigrations;
 using BookingService.BLL.Options;
 using BookingService.Middleware;
 using Microsoft.OpenApi;
@@ -77,7 +78,16 @@ builder.Services.Configure<JwtOptions>(
 builder.Services.AddScoped<UserContext>();
 builder.Services.AddApplicationServices();
 
+
 var app = builder.Build();
+
+// using (var scope = app.Services.CreateScope())
+// {
+//     var migrationService = scope.ServiceProvider
+//         .GetRequiredService<PasswordMigrationService>();
+//
+//     await migrationService.MigratePasswordsAsync();
+// }
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

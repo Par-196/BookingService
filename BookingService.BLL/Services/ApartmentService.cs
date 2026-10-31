@@ -36,8 +36,7 @@ public class ApartmentService : IApartmentService
     public async Task<bool> CreateApartmentAsync(ApartmentDTO apartmentDto)
     {
         await _unitOfWork.ApartmentRepository.CreateApartmentAsync(apartmentDto.ToEntity());
-        await _unitOfWork.SaveChangesAsync();
-        return true;
+        return await _unitOfWork.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> UpdateApartmentAsync(ApartmentDTO apartmentDto)
